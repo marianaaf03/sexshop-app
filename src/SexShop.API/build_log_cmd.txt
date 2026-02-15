@@ -1,0 +1,12 @@
+  Determinando los proyectos que se van a restaurar...
+  Todos los proyectos están actualizados para la restauración.
+  SexShop.Domain -> C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Domain\bin\Debug\net8.0\SexShop.Domain.dll
+  SexShop.Application -> C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\bin\Debug\net8.0\SexShop.Application.dll
+  SexShop.Infrastructure -> C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\bin\Debug\net8.0\SexShop.Infrastructure.dll
+  SexShop.API -> C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.API\bin\Debug\net8.0\SexShop.API.dll
+
+Compilación correcta.
+    0 Advertencia(s)
+    0 Errores
+
+Tiempo transcurrido 00:00:04.43

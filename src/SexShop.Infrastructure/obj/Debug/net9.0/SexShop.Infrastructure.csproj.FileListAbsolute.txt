@@ -1,0 +1,5 @@
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net9.0\SexShop.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net9.0\SexShop.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net9.0\SexShop.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net9.0\SexShop.Infrastructure.AssemblyInfo.cs
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net9.0\SexShop.Infrastructure.csproj.CoreCompileInputs.cache

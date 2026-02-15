@@ -1,0 +1,47 @@
+@model SexShop.Application.DTOs.RegisterDto
+@{
+    ViewData["Title"] = "Registrar - Olove";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card p-5 shadow-sm border-0 mt-5">
+            <div class="text-center mb-5">
+                <h1 class="logo-text">Olove</h1>
+                <p class="text-muted small fw-bold text-uppercase">Crea tu cuenta exclusiva</p>
+            </div>
+            
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="All" class="text-danger small mb-3"></div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Nombre" class="form-label text-muted small fw-bold">NOMBRE</label>
+                        <input asp-for="Nombre" class="form-control border-0 bg-light p-3" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Apellido" class="form-label text-muted small fw-bold">APELLIDO</label>
+                        <input asp-for="Apellido" class="form-control border-0 bg-light p-3" required />
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label text-muted small fw-bold">CORREO ELECTRÓNICO</label>
+                    <input asp-for="Email" class="form-control border-0 bg-light p-3" placeholder="tu@email.com" required />
+                </div>
+                
+                <div class="mb-4">
+                    <label asp-for="Password" class="form-label text-muted small fw-bold">CONTRASEÑA</label>
+                    <input asp-for="Password" type="password" class="form-control border-0 bg-light p-3" placeholder="Digita una contraseña" required />
+                    <span class="text-muted small mt-1 d-block">Mínimo 4 caracteres.</span>
+                </div>
+                
+                <button type="submit" class="btn btn-buy w-100 py-3 fw-bold mb-4 shadow-sm">CREAR CUENTA</button>
+                
+                <div class="text-center border-top pt-4">
+                    <p class="small text-muted mb-0">¿Ya tienes una cuenta? <a asp-action="Login" class="text-accent fw-bold text-decoration-none">INICIA SESIÓN</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

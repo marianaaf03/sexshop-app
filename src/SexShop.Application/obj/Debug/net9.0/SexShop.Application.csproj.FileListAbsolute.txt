@@ -1,0 +1,15 @@
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\SexShop.Application.csproj.AssemblyReference.cache
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\SexShop.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\SexShop.Application.AssemblyInfoInputs.cache
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\SexShop.Application.AssemblyInfo.cs
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\SexShop.Application.csproj.CoreCompileInputs.cache
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\bin\Debug\net9.0\SexShop.Application.deps.json
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\bin\Debug\net9.0\SexShop.Application.dll
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\bin\Debug\net9.0\SexShop.Application.pdb
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\bin\Debug\net9.0\SexShop.Domain.dll
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\bin\Debug\net9.0\SexShop.Domain.pdb
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\SexShop..6B03699E.Up2Date
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\SexShop.Application.dll
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\refint\SexShop.Application.dll
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\SexShop.Application.pdb
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net9.0\ref\SexShop.Application.dll

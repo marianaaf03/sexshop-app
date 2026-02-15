@@ -1,0 +1,123 @@
+﻿@model IEnumerable<SexShop.Application.DTOs.ProductDto>
+@{
+    ViewData["Title"] = "Olove - Prazer em Conectar";
+}
+
+<!-- Main Banner -->
+<div class="container mt-4">
+    <div class="home-banner d-flex align-items-center justify-content-between">
+        <div class="banner-content">
+            <h1 class="banner-title display-4">SUMÉRGETE EN<br><span class="text-white">ESTE PLACER!</span></h1>
+            <p class="text-white mt-3 lead">Conoce los famosos "huevos", son juguetes súper excitantes y con un encaje perfecto.</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-banner mt-4">CLIC AQUÍ Y CONOCE MÁS</a>
+        </div>
+        <div class="banner-image d-none d-lg-block">
+            <img src="https://www.sexshop2u.com/cdn/shop/files/242918d5151e52144d65ee8c78ae3a8a_1080x_webp.jpg?v=1711416223&width=823" alt="Whale Egg" class="whale-egg-image">
+        </div>
+    </div>
+</div>
+
+<!-- Category Icons Bar -->
+<div class="container mt-5">
+    <div class="row text-center">
+        <div class="col-6 col-md-2 mb-4">
+            <a asp-controller="Home" asp-action="Index" asp-route-category="Para Él" class="text-decoration-none">
+                <div class="category-item">
+                    <i class="bi bi-gender-male fs-1 text-accent"></i>
+                    <p class="small fw-bold mt-2 text-dark">Para Él</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a asp-controller="Home" asp-action="Index" asp-route-category="Para Ella" class="text-decoration-none">
+                <div class="category-item">
+                    <i class="bi bi-gender-female fs-1 text-accent"></i>
+                    <p class="small fw-bold mt-2 text-dark">Para Ella</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a asp-controller="Home" asp-action="Index" asp-route-category="Vibradores" class="text-decoration-none">
+                <div class="category-item">
+                    <i class="bi bi-lightning-charge fs-1 text-accent"></i>
+                    <p class="small fw-bold mt-2 text-dark">Vibradores</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a asp-controller="Home" asp-action="Index" asp-route-category="Cosméticos" class="text-decoration-none">
+                <div class="category-item">
+                    <i class="bi bi-droplet fs-1 text-accent"></i>
+                    <p class="small fw-bold mt-2 text-dark">Cosméticos</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a asp-controller="Home" asp-action="Index" asp-route-category="Accesorios" class="text-decoration-none">
+                <div class="category-item">
+                    <i class="bi bi-gear fs-1 text-accent"></i>
+                    <p class="small fw-bold mt-2 text-dark">Accesorios</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-2 mb-4">
+            <a asp-controller="Home" asp-action="Index" asp-route-category="Diversión" class="text-decoration-none">
+                <div class="category-item">
+                    <i class="bi bi-hand-index fs-1 text-accent"></i>
+                    <p class="small fw-bold mt-2 text-dark">Diversión</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Product Grid -->
+<div class="container mt-5 mb-5">
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="row justify-content-center py-5">
+            <div class="col-md-8 text-center bg-light p-5 rounded-4 shadow-sm border border-accent">
+                <i class="bi bi-shield-lock display-1 text-accent mb-4"></i>
+                <h2 class="fw-bold">BIENVENIDO, ADMINISTRADOR</h2>
+                <p class="text-muted fs-5 mb-4">Esta es la vista previa de la tienda para clientes. Como administrador, tus herramientas de gestión están en el panel privado.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-buy px-5 py-3 shadow-sm">IR AL DASHBOARD</a>
+                    <a asp-controller="Admin" asp-action="Products" class="btn btn-outline-accent px-5 py-3">GESTIONAR PRODUCTOS</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold"><i class="bi bi-heart-fill text-accent me-2"></i>¡MIRA, ACABA DE LLEGAR!</h4>
+            <a asp-controller="Home" asp-action="Index" class="text-accent text-decoration-none small">VER TODO ></a>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="position-relative">
+                            <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name" style="height: 200px; object-fit: contain; padding: 20px;">
+                            <button class="btn btn-light position-absolute top-0 end-0 m-2 rounded-circle shadow-sm" style="width: 35px; height: 35px; padding: 0;">
+                                <i class="bi bi-heart text-accent"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title text-dark">@item.Name</h6>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="price-tag">$@item.Price.ToString("N0")</span>
+                                <form asp-controller="Cart" asp-action="Add" method="post" class="d-inline">
+                                    <input type="hidden" name="productId" value="@item.Id" />
+                                    <button type="submit" class="btn btn-buy shadow-sm"><i class="bi bi-bag-plus"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
