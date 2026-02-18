@@ -72,7 +72,8 @@ public class AccountController : Controller
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, tokenDto.Email),
+            new Claim(ClaimTypes.Name, tokenDto.Nombre),
+            new Claim(ClaimTypes.Email, tokenDto.Email),
             new Claim("Token", tokenDto.Token)
         };
 

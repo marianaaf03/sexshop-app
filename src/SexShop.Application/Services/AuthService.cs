@@ -37,6 +37,7 @@ public class AuthService : IAuthService
         {
             Token = token,
             Email = user.Email!,
+            Nombre = user.Nombre,
             Roles = roles
         }, "Login successful");
     }

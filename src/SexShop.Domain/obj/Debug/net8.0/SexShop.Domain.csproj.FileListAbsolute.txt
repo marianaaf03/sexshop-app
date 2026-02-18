@@ -10,3 +10,4 @@ C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Domain\obj\Debug
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Domain\obj\Debug\net8.0\refint\SexShop.Domain.dll
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Domain\obj\Debug\net8.0\SexShop.Domain.pdb
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Domain\obj\Debug\net8.0\ref\SexShop.Domain.dll
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Domain\obj\Debug\net8.0\SexShop.Domain.sourcelink.json

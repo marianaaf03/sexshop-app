@@ -13,3 +13,4 @@ C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net8.0\refint\SexShop.Application.dll
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net8.0\SexShop.Application.pdb
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net8.0\ref\SexShop.Application.dll
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Application\obj\Debug\net8.0\SexShop.Application.sourcelink.json

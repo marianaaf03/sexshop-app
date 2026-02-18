@@ -17,3 +17,4 @@ C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\o
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net8.0\SexShop.Infrastructure.pdb
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net8.0\SexShop.Infrastructure.genruntimeconfig.cache
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net8.0\ref\SexShop.Infrastructure.dll
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.Infrastructure\obj\Debug\net8.0\SexShop.Infrastructure.sourcelink.json

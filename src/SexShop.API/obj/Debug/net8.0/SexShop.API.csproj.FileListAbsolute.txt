@@ -147,3 +147,4 @@ C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.API\bin\Debug\ne
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.API\obj\Debug\net8.0\SexShop..8BED3E75.Up2Date
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.API\obj\Debug\net8.0\SexShop.API.genruntimeconfig.cache
 C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.API\obj\Debug\net8.0\ref\SexShop.API.dll
+C:\Users\ALVAR\OneDrive\Documentos\Proyecto_polnito\src\SexShop.API\obj\Debug\net8.0\SexShop.API.sourcelink.json
