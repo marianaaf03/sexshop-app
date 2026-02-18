@@ -1,25 +1,24 @@
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+WORKDIR /src
 
-# NOTA: En Render, el contexto de construcción es la RAÍZ del repositorio.
-# Por lo tanto, aunque este archivo esté en src/SexShop.API, el comando COPY . . 
-# copiará todo lo que Render le mande (la raíz).
+# Copiamos TODO el repositorio (Render usa la raíz como contexto)
+COPY . .
 
-COPY . ./
+# Usamos rutas completas desde la raíz para evitar errores de directorio
+RUN dotnet restore "src/SexShop.API/SexShop.API.csproj"
 
-# Restauramos el proyecto principal (la ruta es relativa a la raíz)
-RUN dotnet restore src/SexShop.API/SexShop.API.csproj
-
-# Publicamos el proyecto
-RUN dotnet publish src/SexShop.API/SexShop.API.csproj -c Release -o out
+# Publicamos el proyecto en una carpeta de salida limpia
+RUN dotnet publish "src/SexShop.API/SexShop.API.csproj" -c Release -o /app/publish
 
 # Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build /app/out ./
 
-# Configuración de puerto para Render
+# Copiamos solo los archivos publicados
+COPY --from=build /app/publish .
+
+# Configuración para Render
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 
