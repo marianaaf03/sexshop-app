@@ -17,8 +17,8 @@ using SexShop.Infrastructure.UnitsOfWork;
 var builder = WebApplication.CreateBuilder(args);
 
 // Log de versión para confirmar despliegue
-Console.WriteLine("--- LUNA CALIDA API - v1.0.5 ---");
-Console.WriteLine("--- Verificando configuración de base de datos... ---");
+Console.WriteLine("--- LUNA CALIDA API - v1.0.6 ---");
+Console.WriteLine("--- Despliegue Final Confirmado ---");
 
 // Add services to the container.
 builder.Services.AddControllers();
