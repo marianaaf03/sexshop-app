@@ -56,7 +56,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         var userInfo = databaseUri.UserInfo.Split(':');
 
         var host = databaseUri.Host;
-        var port = databaseUri.Port;
+        var port = databaseUri.Port == -1 ? 5432 : databaseUri.Port;
         var database = databaseUri.AbsolutePath.TrimStart('/');
         var user = userInfo[0];
         var password = userInfo.Length > 1 ? userInfo[1] : "";
