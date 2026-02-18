@@ -33,10 +33,14 @@ function App() {
 
     useEffect(() => {
         const handleStorage = () => {
-            setUser(authService.getCurrentUser());
+            const currentUser = authService.getCurrentUser();
+            setUser(prev => {
+                // Return same object to avoid re-render if content hasn't changed
+                if (JSON.stringify(prev) === JSON.stringify(currentUser)) return prev;
+                return currentUser;
+            });
         };
         window.addEventListener('storage', handleStorage);
-        // Polling as fallback for cross-tab or non-event updates
         const interval = setInterval(handleStorage, 1000);
         return () => {
             window.removeEventListener('storage', handleStorage);

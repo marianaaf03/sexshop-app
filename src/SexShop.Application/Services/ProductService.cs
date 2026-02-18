@@ -50,7 +50,15 @@ public class ProductService : IProductService
         var product = await _unitOfWork.Products.GetByIdAsync(id);
         if (product != null)
         {
+            // Preserve ID and Creation Date to avoid EF tracking issues or data loss
+            var originalId = product.Id;
+            var originalDate = product.FechaCreacion;
+            
             _mapper.Map(productDto, product);
+            
+            product.Id = originalId; 
+            product.FechaCreacion = originalDate;
+            
             _unitOfWork.Products.Update(product);
             await _unitOfWork.CompleteAsync();
         }

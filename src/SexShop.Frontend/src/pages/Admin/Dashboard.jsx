@@ -73,18 +73,30 @@ const AdminDashboard = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Preparar datos para el backend (convertir strings a números)
+        const productToSave = {
+            ...formData,
+            price: parseFloat(formData.price),
+            stock: parseInt(formData.stock)
+        };
+
         try {
             if (editingProduct) {
-                await productService.update(editingProduct.id, formData);
+                console.log(`Actualizando producto ${editingProduct.id}:`, productToSave);
+                await productService.update(editingProduct.id, productToSave);
                 toast.success("Producto actualizado con éxito");
             } else {
-                await productService.create(formData);
+                console.log("Creando nuevo producto:", productToSave);
+                await productService.create(productToSave);
                 toast.success("Producto creado con éxito");
             }
             setShowModal(false);
             fetchData();
         } catch (error) {
-            toast.error("Error al guardar el producto");
+            console.error("Error al guardar producto:", error.response?.data || error.message);
+            const msg = error.response?.data?.message || "Error al conectar con el servidor";
+            toast.error(`Error: ${msg}`);
         }
     };
 
