@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SexShop.Infrastructure", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SexShop.API", "SexShop.API\SexShop.API.csproj", "{DA45874A-4EB1-4E32-A019-0DECA087B008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SexShop.Web", "SexShop.Web\SexShop.Web.csproj", "{4CFF9A09-7429-4D62-A4A2-2E20A6418402}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,18 +69,6 @@ Global
 		{DA45874A-4EB1-4E32-A019-0DECA087B008}.Release|x64.Build.0 = Release|Any CPU
 		{DA45874A-4EB1-4E32-A019-0DECA087B008}.Release|x86.ActiveCfg = Release|Any CPU
 		{DA45874A-4EB1-4E32-A019-0DECA087B008}.Release|x86.Build.0 = Release|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Debug|x64.Build.0 = Debug|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Debug|x86.Build.0 = Debug|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Release|x64.ActiveCfg = Release|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Release|x64.Build.0 = Release|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Release|x86.ActiveCfg = Release|Any CPU
-		{4CFF9A09-7429-4D62-A4A2-2E20A6418402}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
