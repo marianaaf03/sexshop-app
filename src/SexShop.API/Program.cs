@@ -55,12 +55,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         var databaseUri = new Uri(connectionString);
         var userInfo = databaseUri.UserInfo.Split(':');
 
-        connectionString = $"Host={databaseUri.Host};" +
-                           $"Port={databaseUri.Port};" +
-                           $"Database={databaseUri.AbsolutePath.TrimStart('/')};" +
-                           $"Username={userInfo[0]};" +
-                           $"Password={userInfo[1]};" +
-                           "SSL Mode=Require;Trust Server Certificate=true;";
+        var host = databaseUri.Host;
+        var port = databaseUri.Port;
+        var database = databaseUri.AbsolutePath.TrimStart('/');
+        var user = userInfo[0];
+        var password = userInfo.Length > 1 ? userInfo[1] : "";
+
+        connectionString = $"Host={host};Port={port};Database={database};Username={user};Password={password};SSL Mode=Require;Trust Server Certificate=true;";
     }
 
     options.UseNpgsql(connectionString);
