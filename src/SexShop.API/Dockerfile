@@ -1,20 +1,19 @@
-# Build Stage
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /source
+WORKDIR /app
 
-# Copy everything and restore
+# Copiamos todo el repositorio para tener acceso a las dependencias entre proyectos
 COPY . .
-RUN dotnet restore "src/SexShop.API/SexShop.API.csproj"
+WORKDIR /app/src/SexShop.API
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
 
-# Build and publish
-RUN dotnet publish "src/SexShop.API/SexShop.API.csproj" -c Release -o /app/publish
-
-# Final Stage
+# Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY --from=build /app/src/SexShop.API/out ./
 
-# Environment variables
+# Render usa el puerto 8080 por defecto en Docker
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 
