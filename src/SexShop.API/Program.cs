@@ -113,18 +113,14 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// CORS - Configuración para permitir Vercel y Local
+// CORS - Configuración temporal total para asegurar conexión desde Vercel
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins(
-            "http://localhost:5173",
-            "https://sexshop-app.vercel.app",
-            "https://sexshop-app-marianaaf03s-projects.vercel.app"
-        )
-        .AllowAnyMethod()
-        .AllowAnyHeader();
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
