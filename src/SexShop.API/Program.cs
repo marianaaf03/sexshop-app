@@ -125,11 +125,12 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Habilitamos Swagger siempre para poder verificar el despliegue
+app.UseSwagger();
+app.UseSwaggerUI(c => {
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SexShop API v1");
+    c.RoutePrefix = string.Empty; // Esto hace que Swagger salga en la raíz (/)
+});
 
 app.UseMiddleware<ExceptionMiddleware>();
 
