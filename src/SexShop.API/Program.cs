@@ -113,12 +113,18 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// CORS
+// CORS - Configuración para permitir Vercel y Local
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        policy.WithOrigins(
+            "http://localhost:5173",
+            "https://sexshop-app.vercel.app",
+            "https://sexshop-app-marianaaf03s-projects.vercel.app"
+        )
+        .AllowAnyMethod()
+        .AllowAnyHeader();
     });
 });
 
@@ -136,7 +142,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
