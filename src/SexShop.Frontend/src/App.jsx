@@ -12,19 +12,51 @@ import OrderSuccess from './pages/OrderSuccess';
 import AdminDashboard from './pages/Admin/Dashboard';
 import authService from './api/authService';
 
+const AdminRoute = ({ user, children }) => {
+    if (!user) return <Navigate to="/login" replace />;
+    const roles = user.roles || user.Roles || [];
+    const isAdmin = roles.some(role => role.toLowerCase() === 'admin');
+    return isAdmin ? children : <Navigate to="/" replace />;
+};
+
 function App() {
     const [cart, setCart] = useState(() => {
         const saved = localStorage.getItem('cart');
         return saved ? JSON.parse(saved) : [];
     });
 
+    const [user, setUser] = useState(() => authService.getCurrentUser());
+
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
+    useEffect(() => {
+        const handleStorage = () => {
+            setUser(authService.getCurrentUser());
+        };
+        window.addEventListener('storage', handleStorage);
+        // Polling as fallback for cross-tab or non-event updates
+        const interval = setInterval(handleStorage, 1000);
+        return () => {
+            window.removeEventListener('storage', handleStorage);
+            clearInterval(interval);
+        };
+    }, []);
+
+    const handleLoginSuccess = () => {
+        setUser(authService.getCurrentUser());
+    };
+
+    const handleLogout = () => {
+        authService.logout();
+        setUser(null);
+    };
+
     const addToCart = (product) => {
-        // Only allow adding to cart if NOT admin
-        if (authService.isAdmin()) {
+        const roles = user?.roles || user?.Roles || [];
+        const isAdmin = roles.some(role => role.toLowerCase() === 'admin');
+        if (isAdmin) {
             toast.error("Los administradores no pueden realizar compras.");
             return;
         }
@@ -72,11 +104,11 @@ function App() {
         <Router>
             <Toaster position="top-right" />
             <div className="d-flex flex-column min-vh-100">
-                <Navbar cartCount={cartCount} />
+                <Navbar cartCount={cartCount} user={user} onLogout={handleLogout} />
                 <main className="flex-grow-1">
                     <Routes>
                         <Route path="/" element={<Home addToCart={addToCart} />} />
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/login" element={<Login onLogin={handleLoginSuccess} user={user} />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/cart" element={
                             <Cart
@@ -90,11 +122,12 @@ function App() {
                         } />
                         <Route path="/order-success" element={<OrderSuccess />} />
 
-                        {/* Admin Routes */}
                         <Route
                             path="/admin"
                             element={
-                                authService.isAdmin() ? <AdminDashboard /> : <Navigate to="/login" />
+                                <AdminRoute user={user}>
+                                    <AdminDashboard />
+                                </AdminRoute>
                             }
                         />
                     </Routes>

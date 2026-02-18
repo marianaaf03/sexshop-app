@@ -2,33 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../api/authService';
 
-const Navbar = ({ cartCount }) => {
-    const [user, setUser] = useState(authService.getCurrentUser());
+const Navbar = ({ cartCount, user, onLogout }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const handleStorage = () => setUser(authService.getCurrentUser());
-        window.addEventListener('storage', handleStorage);
-        const interval = setInterval(handleStorage, 1000);
-        return () => {
-            window.removeEventListener('storage', handleStorage);
-            clearInterval(interval);
-        };
-    }, []);
-
-    const handleLogout = () => {
-        authService.logout();
-        setUser(null);
-        navigate('/login');
-    };
 
     const handleSearch = (e) => {
         e.preventDefault();
         navigate(`/?search=${searchTerm}`);
     };
 
-    const isAdmin = authService.isAdmin();
+    const roles = user?.roles || user?.Roles || [];
+    const isAdmin = roles.some(role => role.toLowerCase() === 'admin');
 
     return (
         <nav className="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top py-3">
@@ -87,7 +71,7 @@ const Navbar = ({ cartCount }) => {
                                 )}
 
                                 <li className="nav-item">
-                                    <button className="btn nav-link p-0 text-dark fs-4" onClick={handleLogout} title="Cerrar Sesión">
+                                    <button className="btn nav-link p-0 text-dark fs-4" onClick={onLogout} title="Cerrar Sesión">
                                         <i className="bi bi-box-arrow-right"></i>
                                     </button>
                                 </li>

@@ -3,17 +3,23 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import authService from '../api/authService';
 
-const Login = () => {
+const Login = ({ onLogin, user }) => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (authService.isAdmin()) {
-            navigate('/admin', { replace: true });
+        if (user) {
+            const roles = user.roles || user.Roles || [];
+            const isAdmin = roles.some(role => role.toLowerCase() === 'admin');
+            if (isAdmin) {
+                navigate('/admin', { replace: true });
+            } else {
+                navigate('/', { replace: true });
+            }
         }
-    }, [navigate]);
+    }, [user, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,12 +28,8 @@ const Login = () => {
         try {
             const res = await authService.login(credentials);
             if (res.success) {
-                window.dispatchEvent(new Event('storage')); // Notify navbar
-                if (authService.isAdmin()) {
-                    navigate('/admin', { replace: true });
-                } else {
-                    navigate('/');
-                }
+                onLogin(); // Trigger reactive update in App.jsx
+                // Navigation will be handled by the useEffect above once 'user' changes
             } else {
                 setError(res.message);
             }
@@ -37,17 +39,6 @@ const Login = () => {
             setLoading(false);
         }
     };
-
-    if (authService.isAdmin()) {
-        return (
-            <div className="container py-5 text-center mt-5">
-                <div className="spinner-border text-accent mb-3"></div>
-                <h3>Ya estás identificado como Administrador</h3>
-                <p className="text-muted">Redirigiéndote a tu panel...</p>
-                <Link to="/admin" className="btn btn-accent px-5 py-2 mt-3 rounded-pill">Ir al Panel de Control Ahora</Link>
-            </div>
-        );
-    }
 
     return (
         <div className="container py-5">
