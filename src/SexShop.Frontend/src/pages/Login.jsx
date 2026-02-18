@@ -11,7 +11,7 @@ const Login = () => {
 
     useEffect(() => {
         if (authService.isAdmin()) {
-            navigate('/admin');
+            navigate('/admin', { replace: true });
         }
     }, [navigate]);
 
@@ -23,7 +23,11 @@ const Login = () => {
             const res = await authService.login(credentials);
             if (res.success) {
                 window.dispatchEvent(new Event('storage')); // Notify navbar
-                navigate('/');
+                if (authService.isAdmin()) {
+                    navigate('/admin', { replace: true });
+                } else {
+                    navigate('/');
+                }
             } else {
                 setError(res.message);
             }

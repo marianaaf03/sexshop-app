@@ -28,16 +28,20 @@ const AdminDashboard = () => {
 
     const fetchData = async () => {
         setLoading(true);
+        console.log("AdminDashboard: Starting data fetch...");
         try {
             const productData = await productService.getAll();
+            console.log("AdminDashboard: Products received:", productData);
             setProducts(productData.data || []);
 
             const userData = await userService.getAll();
+            console.log("AdminDashboard: Users received:", userData);
             setUsers(userData.data || []);
         } catch (error) {
-            console.error("Error fetching admin data", error);
-            toast.error("Error al cargar los datos");
+            console.error("AdminDashboard: Error fetching admin data", error);
+            toast.error("Error al cargar los datos del panel");
         } finally {
+            console.log("AdminDashboard: Fetch completed, disabling loading state.");
             setLoading(false);
         }
     };

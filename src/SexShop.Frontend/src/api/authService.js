@@ -4,11 +4,13 @@ const authService = {
     login: async (credentials) => {
         const response = await apiClient.post('/api/auth/login', credentials);
         if (response.data.success) {
-            localStorage.setItem('token', response.data.data.token);
+            const apiUser = response.data.data;
+            localStorage.setItem('token', apiUser.token);
             localStorage.setItem('user', JSON.stringify({
-                email: response.data.data.email,
-                nombre: response.data.data.nombre,
-                roles: response.data.data.roles
+                email: apiUser.email,
+                nombre: apiUser.nombre,
+                // Handle casing: some APIs return 'Roles', others 'roles'
+                roles: apiUser.roles || apiUser.Roles || []
             }));
         }
         return response.data;
@@ -36,8 +38,9 @@ const authService = {
 
     isAdmin: () => {
         const user = authService.getCurrentUser();
-        if (!user || !user.roles) return false;
-        return user.roles.some(role => role.toLowerCase() === 'admin');
+        if (!user) return false;
+        const roles = user.roles || user.Roles || [];
+        return roles.some(role => role.toLowerCase() === 'admin');
     }
 };
 
