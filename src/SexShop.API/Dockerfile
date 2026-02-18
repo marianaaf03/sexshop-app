@@ -1,24 +1,25 @@
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /app
 
-# Copiamos todo el contenido del repositorio (contexto raíz)
+# Copiamos todo lo que Render mande como contexto
 COPY . .
 
-# Restauramos la SOLUCIÓN completa para asegurar que todas las dependencias se encuentren
-RUN dotnet restore "src/SexShop.sln"
+# Diagnóstico: Listar archivos para ver dónde estamos exactamente
+RUN ls -R
 
-# Publicamos solo el proyecto API
-RUN dotnet publish "src/SexShop.API/SexShop.API.csproj" -c Release -o /app/publish --no-restore
+# Intentamos restaurar buscando el archivo .sln esté donde esté
+# Esto encontrará "src/SexShop.sln" o "SexShop.sln" independientemente del contexto
+RUN dotnet restore $(find . -name "*.sln" | head -n 1)
+
+# Publicamos el proyecto API buscando su archivo .csproj
+RUN dotnet publish $(find . -name "SexShop.API.csproj" | head -n 1) -c Release -o /app/publish
 
 # Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-
-# Copiamos los archivos publicados desde la etapa de construcción
 COPY --from=build /app/publish .
 
-# Render usa el puerto 8080 por defecto
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 
