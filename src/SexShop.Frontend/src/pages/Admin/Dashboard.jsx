@@ -30,7 +30,8 @@ const AdminDashboard = () => {
         setLoading(true);
         console.log("AdminDashboard: Starting data fetch...");
         try {
-            const productData = await productService.getAll();
+            // Use getAllAdmin to see ALL products including hidden ones
+            const productData = await productService.getAllAdmin();
             console.log("AdminDashboard: Products received:", productData);
             setProducts(productData.data || []);
 
@@ -39,7 +40,13 @@ const AdminDashboard = () => {
             setUsers(userData.data || []);
         } catch (error) {
             console.error("AdminDashboard: Error fetching admin data", error);
-            toast.error("Error al cargar los datos del panel");
+            // Fallback to normal getIfNeeded
+            try {
+                const productData = await productService.getAll();
+                setProducts(productData.data || []);
+            } catch (e) {
+                toast.error("Error al cargar los datos del panel");
+            }
         } finally {
             console.log("AdminDashboard: Fetch completed, disabling loading state.");
             setLoading(false);
@@ -55,7 +62,8 @@ const AdminDashboard = () => {
                 price: product.price,
                 stock: product.stock,
                 category: product.category,
-                imageUrl: product.imageUrl || ''
+                imageUrl: product.imageUrl || '',
+                activo: product.activo ?? true // Default to true if undefined
             });
         } else {
             setEditingProduct(null);
@@ -65,7 +73,8 @@ const AdminDashboard = () => {
                 price: '',
                 stock: '',
                 category: 'Para Él',
-                imageUrl: ''
+                imageUrl: '',
+                activo: true
             });
         }
         setShowModal(true);
@@ -239,7 +248,10 @@ const AdminDashboard = () => {
                                                     style={{ width: '48px', height: '48px', objectFit: 'cover' }}
                                                 />
                                                 <div>
-                                                    <div className="fw-bold text-main text-truncate" style={{ maxWidth: '200px' }}>{product.name}</div>
+                                                    <div className="fw-bold text-main text-truncate" style={{ maxWidth: '200px' }}>
+                                                        {product.name}
+                                                        {!product.activo && <span className="badge bg-danger ms-2">Inactivo</span>}
+                                                    </div>
                                                     <div className="text-muted x-small">ID: #{product.id}</div>
                                                 </div>
                                             </div>
@@ -318,7 +330,7 @@ const AdminDashboard = () => {
             </div>
 
             {/* Modal for Add/Edit */}
-            <AnimatePresence>
+            < AnimatePresence >
                 {showModal && (
                     <div className="modal-backdrop-custom d-flex align-items-center justify-content-center p-3" style={{
                         position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -408,8 +420,8 @@ const AdminDashboard = () => {
                         </motion.div>
                     </div>
                 )}
-            </AnimatePresence>
-        </div>
+            </AnimatePresence >
+        </div >
     );
 };
 

@@ -24,6 +24,14 @@ public class ProductController : ControllerBase
         return Ok(ApiResponse<IEnumerable<ProductDto>>.SuccessResponse(products));
     }
 
+    [Authorize(Roles = "Admin")]
+    [HttpGet("admin")]
+    public async Task<ActionResult<ApiResponse<IEnumerable<ProductDto>>>> GetAllAdmin()
+    {
+        var products = await _productService.GetAllProductsAsync();
+        return Ok(ApiResponse<IEnumerable<ProductDto>>.SuccessResponse(products));
+    }
+
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<ProductDto>>> GetById(int id)
     {
