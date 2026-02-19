@@ -18,7 +18,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<ApiResponse<IEnumerable<ProductDto>>>> GetAll(int page = 1, int pageSize = 12)
+    public async Task<ActionResult<ApiResponse<IEnumerable<ProductDto>>>> GetAll(int page = 1, int pageSize = 100)
     {
         var products = await _productService.GetActiveProductsAsync(page, pageSize);
         return Ok(ApiResponse<IEnumerable<ProductDto>>.SuccessResponse(products));

@@ -101,22 +101,10 @@ const Home = ({ addToCart }) => {
                 />
             </motion.div>
 
-            {/* Search and Categories */}
+            {/* Filter and Categories */}
             <div className="row mb-5 align-items-center">
-                <div className="col-md-4 mb-3 mb-md-0">
-                    <div className="input-group input-group-lg shadow-sm rounded-pill overflow-hidden">
-                        <span className="input-group-text border-0 bg-white"><i className="bi bi-search text-muted"></i></span>
-                        <input
-                            type="text"
-                            className="form-control border-0"
-                            placeholder="Buscar productos..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <div className="col-md-8">
-                    <div className="d-flex justify-content-md-end flex-wrap gap-2">
+                <div className="col-12">
+                    <div className="d-flex justify-content-center flex-wrap gap-2">
                         {categories.map(cat => (
                             <button
                                 key={cat}
