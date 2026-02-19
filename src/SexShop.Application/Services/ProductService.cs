@@ -19,15 +19,15 @@ public class ProductService : IProductService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+    public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(int page = 1, int pageSize = 50)
     {
-        var products = await _unitOfWork.Products.GetAllAsync();
+        var products = await _unitOfWork.Products.GetAllAsync(page, pageSize);
         return _mapper.Map<IEnumerable<ProductDto>>(products);
     }
 
-    public async Task<IEnumerable<ProductDto>> GetActiveProductsAsync()
+    public async Task<IEnumerable<ProductDto>> GetActiveProductsAsync(int page = 1, int pageSize = 12)
     {
-        var products = await _unitOfWork.Products.GetActiveProductsAsync();
+        var products = await _unitOfWork.Products.GetActiveProductsAsync(page, pageSize);
         return _mapper.Map<IEnumerable<ProductDto>>(products);
     }
 

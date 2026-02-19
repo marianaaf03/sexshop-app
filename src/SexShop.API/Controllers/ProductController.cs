@@ -18,17 +18,17 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<ApiResponse<IEnumerable<ProductDto>>>> GetAll()
+    public async Task<ActionResult<ApiResponse<IEnumerable<ProductDto>>>> GetAll(int page = 1, int pageSize = 12)
     {
-        var products = await _productService.GetActiveProductsAsync();
+        var products = await _productService.GetActiveProductsAsync(page, pageSize);
         return Ok(ApiResponse<IEnumerable<ProductDto>>.SuccessResponse(products));
     }
 
     [Authorize(Roles = "Admin")]
     [HttpGet("admin")]
-    public async Task<ActionResult<ApiResponse<IEnumerable<ProductDto>>>> GetAllAdmin()
+    public async Task<ActionResult<ApiResponse<IEnumerable<ProductDto>>>> GetAllAdmin(int page = 1, int pageSize = 50)
     {
-        var products = await _productService.GetAllProductsAsync();
+        var products = await _productService.GetAllProductsAsync(page, pageSize);
         return Ok(ApiResponse<IEnumerable<ProductDto>>.SuccessResponse(products));
     }
 

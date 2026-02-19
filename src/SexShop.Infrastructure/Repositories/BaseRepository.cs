@@ -19,9 +19,12 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public async Task<IEnumerable<T>> GetAllAsync()
+    public async Task<IEnumerable<T>> GetAllAsync(int page = 1, int pageSize = 100)
     {
-        return await _context.Set<T>().ToListAsync();
+        return await _context.Set<T>()
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
     }
 
     public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)

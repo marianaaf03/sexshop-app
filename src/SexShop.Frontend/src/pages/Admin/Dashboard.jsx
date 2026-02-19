@@ -30,25 +30,19 @@ const AdminDashboard = () => {
         setLoading(true);
         console.log("AdminDashboard: Starting data fetch...");
         try {
-            // Use getAllAdmin to see ALL products including hidden ones
-            const productData = await productService.getAllAdmin();
-            console.log("AdminDashboard: Products received:", productData);
-            setProducts(productData.data || []);
+            // Parallelize fetching for faster load
+            const [productData, userData] = await Promise.all([
+                productService.getAllAdmin(),
+                userService.getAll()
+            ]);
 
-            const userData = await userService.getAll();
-            console.log("AdminDashboard: Users received:", userData);
+            console.log("AdminDashboard: Data received:", { products: !!productData, users: !!userData });
+            setProducts(productData.data || []);
             setUsers(userData.data || []);
         } catch (error) {
             console.error("AdminDashboard: Error fetching admin data", error);
-            // Fallback to normal getIfNeeded
-            try {
-                const productData = await productService.getAll();
-                setProducts(productData.data || []);
-            } catch (e) {
-                toast.error("Error al cargar los datos del panel");
-            }
+            toast.error("Error al cargar los datos del panel");
         } finally {
-            console.log("AdminDashboard: Fetch completed, disabling loading state.");
             setLoading(false);
         }
     };

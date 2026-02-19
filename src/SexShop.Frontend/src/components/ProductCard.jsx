@@ -15,6 +15,7 @@ const ProductCard = ({ product, addToCart }) => {
                     className="card-img-top"
                     alt={product.name}
                     style={{ height: '250px', objectFit: 'cover' }}
+                    loading="lazy"
                 />
                 <span className="badge bg-white text-accent position-absolute top-0 end-0 m-3 shadow-sm rounded-pill">
                     {product.category}

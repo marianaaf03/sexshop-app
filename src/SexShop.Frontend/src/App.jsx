@@ -31,22 +31,20 @@ function App() {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
-    useEffect(() => {
-        const handleStorage = () => {
-            const currentUser = authService.getCurrentUser();
-            setUser(prev => {
-                // Return same object to avoid re-render if content hasn't changed
-                if (JSON.stringify(prev) === JSON.stringify(currentUser)) return prev;
-                return currentUser;
-            });
-        };
-        window.addEventListener('storage', handleStorage);
-        const interval = setInterval(handleStorage, 1000);
-        return () => {
-            window.removeEventListener('storage', handleStorage);
-            clearInterval(interval);
-        };
-    }, []);
+    const handleStorage = (e) => {
+        if (e && e.key && e.key !== 'user' && e.key !== 'cart') return;
+        const currentUser = authService.getCurrentUser();
+        setUser(prev => {
+            const currentStr = JSON.stringify(currentUser);
+            const prevStr = JSON.stringify(prev);
+            if (currentStr === prevStr) return prev;
+            return currentUser;
+        });
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => {
+        window.removeEventListener('storage', handleStorage);
+    };
 
     const handleLoginSuccess = () => {
         setUser(authService.getCurrentUser());

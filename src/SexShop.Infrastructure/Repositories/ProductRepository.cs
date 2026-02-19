@@ -11,8 +11,12 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
     }
 
-    public async Task<IEnumerable<Product>> GetActiveProductsAsync()
+    public async Task<IEnumerable<Product>> GetActiveProductsAsync(int page = 1, int pageSize = 12)
     {
-        return await _context.Products.Where(p => p.Activo).ToListAsync();
+        return await _context.Products
+            .Where(p => p.Activo)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
     }
 }

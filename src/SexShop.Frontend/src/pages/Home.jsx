@@ -5,6 +5,22 @@ import authService from '../api/authService';
 import productService from '../api/productService';
 import ProductCard from '../components/ProductCard';
 
+const ProductSkeleton = () => (
+    <div className="col-12 col-md-6 col-lg-3">
+        <div className="card h-100 border-0 shadow-sm overflow-hidden" style={{ borderRadius: '20px' }}>
+            <div className="skeleton" style={{ height: '250px' }}></div>
+            <div className="card-body">
+                <div className="skeleton mb-2" style={{ height: '20px', width: '80%' }}></div>
+                <div className="skeleton mb-3" style={{ height: '15px', width: '60%' }}></div>
+                <div className="d-flex justify-content-between align-items-center">
+                    <div className="skeleton" style={{ height: '30px', width: '40%' }}></div>
+                    <div className="skeleton" style={{ height: '40px', width: '40%', borderRadius: '20px' }}></div>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
 const Home = ({ addToCart }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,6 +36,7 @@ const Home = ({ addToCart }) => {
 
         const fetchProducts = async () => {
             try {
+                // Use default params but benefit from internal caching in productService
                 const data = await productService.getAll();
                 setProducts(data.data || []);
             } catch (error) {
@@ -71,7 +88,6 @@ const Home = ({ addToCart }) => {
                         </button>
                     </div>
                 </div>
-                {/* Decorative element */}
                 <div
                     className="position-absolute"
                     style={{
@@ -85,33 +101,53 @@ const Home = ({ addToCart }) => {
                 />
             </motion.div>
 
-            {/* Categories */}
-            <div className="d-flex justify-content-center flex-wrap gap-3 mb-5">
-                {categories.map(cat => (
-                    <button
-                        key={cat}
-                        className={`btn rounded-pill px-4 ${category === cat ? 'btn-accent' : 'btn-outline-secondary'}`}
-                        onClick={() => setCategory(cat)}
-                    >
-                        {cat}
-                    </button>
-                ))}
+            {/* Search and Categories */}
+            <div className="row mb-5 align-items-center">
+                <div className="col-md-4 mb-3 mb-md-0">
+                    <div className="input-group input-group-lg shadow-sm rounded-pill overflow-hidden">
+                        <span className="input-group-text border-0 bg-white"><i className="bi bi-search text-muted"></i></span>
+                        <input
+                            type="text"
+                            className="form-control border-0"
+                            placeholder="Buscar productos..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className="col-md-8">
+                    <div className="d-flex justify-content-md-end flex-wrap gap-2">
+                        {categories.map(cat => (
+                            <button
+                                key={cat}
+                                className={`btn rounded-pill px-4 btn-sm ${category === cat ? 'btn-accent' : 'btn-outline-secondary'}`}
+                                onClick={() => setCategory(cat)}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+                </div>
             </div>
 
             {/* Product List */}
-            {loading ? (
-                <div className="text-center py-5">
-                    <div className="spinner-border text-accent" role="status"></div>
-                </div>
-            ) : (
-                <div className="row g-4 px-2">
-                    {filteredProducts.map(product => (
+            <div className="row g-4 px-2">
+                {loading ? (
+                    Array(8).fill(0).map((_, i) => <ProductSkeleton key={i} />)
+                ) : (
+                    filteredProducts.map(product => (
                         <div key={product.id} className="col-12 col-md-6 col-lg-3">
                             <ProductCard product={product} addToCart={!isAdmin ? addToCart : null} />
                         </div>
-                    ))}
-                </div>
-            )}
+                    ))
+                )}
+                {!loading && filteredProducts.length === 0 && (
+                    <div className="text-center py-5">
+                        <i className="bi bi-search display-1 text-muted opacity-25"></i>
+                        <p className="fs-4 mt-3 text-muted">No encontramos productos que coincidan con tu búsqueda.</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
