@@ -11,7 +11,7 @@ let productCache = {
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 const productService = {
-    getAll: async (page = 1, pageSize = 12, forceRefresh = false) => {
+    getAll: async (page = 1, pageSize = 100, forceRefresh = false) => {
         const now = Date.now();
         if (!forceRefresh && productCache.active && (now - productCache.lastFetchActive < CACHE_DURATION)) {
             return productCache.active;
